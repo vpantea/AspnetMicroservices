@@ -25,7 +25,9 @@ namespace Discount.API.Controllers
         public async Task<ActionResult<Coupon>> GetDiscount(string productName)
         {
             var coupon = await _repository.GetDiscount(productName);
-            return Ok(coupon);
+            if(coupon != null)
+                return Ok(coupon);
+            return StatusCode(500);
         }
 
         [HttpPost]
